@@ -15,13 +15,15 @@ An imbalance- and overfitting-aware pipeline (compound Focal-Tversky + weighted 
 A qualitative cross-environment evaluation on three unseen Kashmir lakes (Manasbal, Wular, Nageen) and non-lake backgrounds, with manually annotated ground-truth masks for the displayed images.
 All training/evaluation scripts, trained-model prediction outputs, figure-generation code, and result tables used in the paper, for full reproducibility.
 
-2. Repository structure
-FloPWD-Benchmark/
+## 2. Repository Structure
+
+FloPWD-Segmentation/
 ├── README.md
+│
 ├── code/
 │   ├── dataset/
-│   │   ├── dal_base.py               # baseline dataset class (shared)
-│   │   ├── bisenet_dataset.py        # resolve-stage: PlasticMaskBank + compound loss
+│   │   ├── dal_base.py
+│   │   ├── bisenet_dataset.py
 │   │   ├── enet_dataset.py
 │   │   ├── fastscnn_dataset.py
 │   │   └── mobilenet_dataset.py
@@ -33,63 +35,93 @@ FloPWD-Benchmark/
 │   │   └── train_mobilenet.py
 │   │
 │   ├── resolve_training/
-│   │   ├── train_bisenet.py          # rename from truncated "isenet_train"
-│   │   ├── train_enet.py             # rename from "net_training"
-│   │   ├── train_fastscnn.py         # rename from "astscnn_train"
-│   │   └── train_mobilenet.py        # rename from "mobilenet_train"
+│   │   ├── train_bisenet.py
+│   │   ├── train_enet.py
+│   │   ├── train_fastscnn.py
+│   │   └── train_mobilenet.py
 │   │
 │   └── inference/
-│       ├── bisenet_base_infer.py     # baseline-checkpoint inference
-│       └── bisenet_infer1.py         # resolve-checkpoint inference
-│       # NOTE: a single generic inference script covers all four via --model flag
+│       ├── bisenet_base_infer.py
+│       └── bisenet_infer1.py
 │
-├── checkpoints_and_logs/             # "checkpoints & logs" → no & or spaces in repo paths
+├── checkpoints_and_logs/
 │   ├── bisenet/
-│   │   ├── baseline/                 # was checkpoints_bisenetbaseline
+│   │   ├── baseline/
 │   │   │   ├── best_model_bisenet.pth
 │   │   │   └── logs/
-│   │   └── resolved/                 # was checkpoints_bisenetv2_resolve
+│   │   └── resolved/
 │   │       ├── best_model_bisenet.pth
-│   │       ├── logs/                 # train_loss.csv, train_mIoU.csv, val_*.csv, training_metrics_bisenet.csv, etc.
+│   │       ├── logs/
 │   │       └── plots/
-│   ├── enet/{baseline,resolved}/...
-│   ├── fastscnn/{baseline,resolved}/...
-│   └── mobilenet/{baseline,resolved}/...
+│   │
+│   ├── enet/
+│   │   ├── baseline/
+│   │   └── resolved/
+│   │
+│   ├── fastscnn/
+│   │   ├── baseline/
+│   │   └── resolved/
+│   │
+│   └── mobilenet/
+│       ├── baseline/
+│       └── resolved/
 │
-├── predicted_images/                 # "predicted images" → underscore, no space
-│   ├── val_baseline/                 # baseline checkpoints on Dal Lake val
+├── predicted_images/
+│   ├── val_baseline/
 │   │   ├── val_bisenet/
 │   │   ├── val_enet/
 │   │   ├── val_fastscnn/
 │   │   └── val_mobilenet/
-│   ├── val_resolved/                 # was "val after resolve"
+│   │
+│   ├── val_resolved/
 │   │   ├── val_bisenet/
 │   │   ├── val_enet/
 │   │   ├── val_fastscnn/
 │   │   └── val_mobilenet/
+│   │
 │   ├── cross_environment/
-│   │   ├── manasbal/                 
+│   │   ├── manasbal/
 │   │   │   ├── original/
 │   │   │   ├── bisenet_pred/
 │   │   │   ├── enet_pred/
 │   │   │   ├── fastscnn_pred/
 │   │   │   └── mobilenet_pred/
-│   │   ├── wuler/                    
-│   │   │   └── {original,bisenet_pred,enet_pred,fastscnn_pred,mobilenet_pred}/
-│   │   ├── nigeen/                  
-│   │   │   └── {original,bisenet_pred,enet_pred,fastscnn_pred,mobilenet_pred}/
+│   │   │
+│   │   ├── wular/
+│   │   │   ├── original/
+│   │   │   ├── bisenet_pred/
+│   │   │   ├── enet_pred/
+│   │   │   ├── fastscnn_pred/
+│   │   │   └── mobilenet_pred/
+│   │   │
+│   │   ├── nageen/
+│   │   │   ├── original/
+│   │   │   ├── bisenet_pred/
+│   │   │   ├── enet_pred/
+│   │   │   ├── fastscnn_pred/
+│   │   │   └── mobilenet_pred/
+│   │   │
 │   │   └── non_lake/
-│   │       └── {original,bisenet_pred,enet_pred,fastscnn_pred,mobilenet_pred}/
-│   └── inference/                    # ad-hoc / demo inference outputs
+│   │       ├── original/
+│   │       ├── bisenet_pred/
+│   │       ├── enet_pred/
+│   │       ├── fastscnn_pred/
+│   │       └── mobilenet_pred/
+│   │
+│   └── inference/
 │
-├── figures/           
+└── figures/
     ├── fig1_train_val_loss_miou_baseline.png
     ├── fig1_train_val_loss_miou_resolved.png
     ├── fig3_metrics_heatmap_baseline.png
     ├── fig3_metrics_heatmap_resolved.png
     ├── maskbank_diagram.png
-    ├── qualitative_comparison_grid_{baseline,resolved}.png
-    └── qualitative_{manasbal,wular,nageen,nonlake}_grid.png
+    ├── qualitative_comparison_grid_baseline.png
+    ├── qualitative_comparison_grid_resolved.png
+    ├── qualitative_manasbal_grid.png
+    ├── qualitative_wular_grid.png
+    ├── qualitative_nageen_grid.png
+    └── qualitative_nonlake_grid.png
    
 ## Results
 
